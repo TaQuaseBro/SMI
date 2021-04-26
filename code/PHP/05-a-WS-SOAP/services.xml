@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceLocations>
+    <Description>Book store service</Description>
+    <Locations>
+      <ServiceLocation>http://localhost:8084/03-WebAppBookStore/ServiceBookStore?WSDL</ServiceLocation>
+      <ServiceLocation>http://localhost:9081/03-WebAppBookStore/ServiceBookStore?WSDL</ServiceLocation>
+      <ServiceLocation>http://localhost:9082/03-WebAppBookStore/ServiceBookStore?WSDL</ServiceLocation>
+      <ServiceLocation>http://localhost/03-WebAppBookStore/ServiceBookStore?WSDL</ServiceLocation>
+    </Locations>
+</ServiceLocations>

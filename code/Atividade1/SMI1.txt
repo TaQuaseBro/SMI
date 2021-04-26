@@ -1,0 +1,13 @@
+getZips.php
+
+-> Seguimos exmeplo de getCounties
+-> Corremos Debug Mode a verificar variáveis
+
+forms.js
+
+-> Regex (atualizacao de funcao)
+-> Alterámos a funcao SelectCountyHandleReply
+
+formUpdateProfile.php
+
+-> atualizacao de php para adicionar a busca de maxUploadSize numa nova tabela

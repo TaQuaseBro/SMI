@@ -1,0 +1,7 @@
+AuthType Basic
+AuthName "Authentication HTTP - Basic"
+AuthUserFile "C:\Users\cgonc\Documents\Aulas\UCs\Bolonha\LEIM\SMI\2019-2020-SV-(cajo)\Exemplos\PHP\07-Auth\.htauth-basic.pw"
+
+Require valid-user
+
+Options Indexes
