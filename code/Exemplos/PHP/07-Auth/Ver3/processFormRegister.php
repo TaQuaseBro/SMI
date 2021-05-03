@@ -57,7 +57,7 @@ if ($userAlreadyExists) {
     /* session_start();
       $_SESSION['username'] = $username;
       $_SESSION['id'] = $idUser;
-
+$_SESSION['id'] = $idUser; nova linha
       if (isset($_SESSION['locationAfterAuth'])) {
       $baseNextUrl = $baseUrl;
       $nextUrl = $_SESSION['locationAfterAuth'];
