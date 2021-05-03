@@ -11,7 +11,7 @@
 
     $name = webAppName();
 
-    $nextUrl = "https://" . $serverName . ":" . $serverPortSSL . $name . "processFormLogin.php";
+    $nextUrl = "https://" . $serverName . ":" . $serverPortSSL . $name . "processFormRegister.php";
     #$nextUrl = "http://" . $serverName . ":" . $serverPort . $name . "processFormLogin.php";
 ?>
 <html>
@@ -29,18 +29,26 @@
             <table>
                 <tr>
                     <td>User Name</td>
-                    <td><input type="text" name="username" placeholder="Type your name"></td>
+                    <td><input type="text" name="username" placeholder="Username"></td>
                 </tr>
                 <tr>
                     <td>Password</td>
-                    <td><input type="password" name="password" placeholder="Type your password"></td>
+                    <td><input type="password" name="password" placeholder="Password"></td>
                 </tr>
+                <tr>
+                    <td>Confirm Password</td>
+                    <td><input type="password" name="passwordConfirm" placeholder="Confirm password"></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="email" name="email" placeholder="Email"></td>
+                </tr>
+                
             </table>
 
-            <input type="submit" value="Login"> <input type="reset" value="Clear">
+            <input type="submit" value="Register"> <input type="reset" value="Clear">
         </form>
-        
-        <p><a href="formRegister.php">Register new user</a></p>
-                
+
+        <p><a href="formLogin.php">Back</a></p>
     </body>
 </html>

@@ -12,3 +12,4 @@ formUpdateProfile.php
 
 -> atualizacao de php para adicionar a busca de maxUploadSize numa nova tabela
 
+novo teste
