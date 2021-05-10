@@ -3,6 +3,7 @@ require_once( "../../Lib/lib.php" );
 require_once( "../../Lib/db.php" );
 require_once( "../../Lib/lib-mail-v2.php" );
 
+
 $flags[] = FILTER_NULL_ON_FAILURE;
 
 $method = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_STRING, $flags);
@@ -41,6 +42,7 @@ if ($password != $passwordConfirm) {
 } else {
     //header("Location: " . $baseNextUrl . $nextUrl);
     //return;
+
 }
 if ($userAlreadyExists) {
     $nextUrl = "formRegister.php";
@@ -103,6 +105,7 @@ if ($userAlreadyExists) {
     
 
     dbDisconnect();
+
 }
 
 header("Location: " . $baseNextUrl . $nextUrl);
