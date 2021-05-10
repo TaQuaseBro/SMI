@@ -1,7 +1,8 @@
 <?php
-
 require_once( "../../Lib/lib.php" );
 require_once( "../../Lib/db.php" );
+require_once( "../../Lib/lib-mail-v2.php" );
+
 
 $flags[] = FILTER_NULL_ON_FAILURE;
 
@@ -39,8 +40,9 @@ echo "<h2>" . $username . "</h2>";
 if ($password != $passwordConfirm) {
     $nextUrl = "formRegister.php";
 } else {
-    header("Location: " . $baseNextUrl . $nextUrl);
-    return;
+    //header("Location: " . $baseNextUrl . $nextUrl);
+    //return;
+
 }
 if ($userAlreadyExists) {
     $nextUrl = "formRegister.php";
@@ -49,21 +51,61 @@ if ($userAlreadyExists) {
     dbConnect( ConfigFile );
     $dataBaseName = $GLOBALS['configDataBase']->db;
     mysqli_select_db( $GLOBALS['ligacao'], $dataBaseName );
-    $queryString = 
-        "INSERT INTO $dataBaseName (`name`, `password`, `email`, `active`)
-            VALUES($username, $password, $email, 0)";
+    $queryString = "INSERT INTO `$dataBaseName`.`auth-basic` (`name`, `password`, `email`, `active`) VALUES('$username', '$password', '$email', 0)";
 
-    mysqli_query( $GLOBALS['ligacao'], $queryString);
-    /* session_start();
-      $_SESSION['username'] = $username;
-      $_SESSION['id'] = $idUser;
-$_SESSION['id'] = $idUser; nova linha
-      if (isset($_SESSION['locationAfterAuth'])) {
-      $baseNextUrl = $baseUrl;
-      $nextUrl = $_SESSION['locationAfterAuth'];
-      } else {
-      $nextUrl = "pag_1.php";
-      } */
+    $queryResult = mysqli_query( $GLOBALS['ligacao'], $queryString);
+
+    
+    //EMAIL SENDING 
+    $Account = 2;
+    $ToName = $username;
+    $ToEmail = $email;
+    $Subject = "Teste 123";
+    $Message = "https://localhost/examples-smi/07-Auth/Ver3/processAuth.php?name=$username";
+    
+    dbConnect( ConfigFile );
+                
+
+    mysqli_select_db( $GLOBALS['ligacao'], $dataBaseName );
+
+    $queryString2 = "SELECT * FROM `$dataBaseName`.`email-accounts` WHERE `id`='$Account'";
+    $queryResult2 = mysqli_query( $GLOBALS['ligacao'], $queryString2 );
+    $record = mysqli_fetch_array( $queryResult2 );
+        
+    $smtpServer = $record[ 'smtpServer' ];
+    $port = intval( $record[ 'port' ] );
+    $useSSL = boolval( $record[ 'useSSL' ] );
+    $timeout = intval( $record[ 'timeout' ] );
+    $loginName = $record[ 'loginName' ];
+    $password = $record[ 'password' ];
+    $fromEmail = $record[ 'email' ];
+    $fromName = $record[ 'displayName' ];
+    
+    mysqli_free_result( $queryResult2 );
+    $Debug = FALSE;
+    
+    $result = sendAuthEmail(
+            $smtpServer,
+            $useSSL,
+            $port,
+            $timeout,
+            $loginName,
+            $password,
+            $fromEmail,
+            $fromName,
+            $ToName . " <" . $ToEmail . ">",
+            NULL,
+            NULL,
+            $Subject,
+            $Message,
+            $Debug,
+            NULL );
+    
+    echo $result;
+    
+
+    dbDisconnect();
+
 }
 
 header("Location: " . $baseNextUrl . $nextUrl);
